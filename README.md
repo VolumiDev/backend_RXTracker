@@ -87,22 +87,48 @@ El JSON de Gemini usa un campo `block_type` como discriminador para el polimorfi
 
 ### Requisitos
 - Java 21
-- Docker (para MongoDB)
+- Docker + Docker Compose
 - Maven
 
-### 1. Levantar MongoDB con Docker
-```bash
-docker run -d -p 27017:27017 --name rxtracker-mongo mongo:7
+### 1. Configurar variables de entorno
+
+Crea un archivo `.env` en la raíz del proyecto. Las variables necesarias son:
+
+```env
+# Spring Boot
+MONGODB_URI=
+
+# MongoDB
+MONGO_INITDB_ROOT_USERNAME=
+MONGO_INITDB_ROOT_PASSWORD=
+
+# Mongo Express
+ME_CONFIG_MONGODB_ADMINUSERNAME=
+ME_CONFIG_MONGODB_ADMINPASSWORD=
+ME_CONFIG_MONGODB_URL=
+ME_CONFIG_BASICAUTH_USERNAME=
+ME_CONFIG_BASICAUTH_PASSWORD=
 ```
 
-### 2. Configurar variables de entorno
+> El `.env` es leído automáticamente por Spring Boot (via `spring-dotenv`) y por Docker Compose.
 
-Crea un archivo `.env` en la raíz del proyecto:
-```env
-MONGODB_URI=mongodb://localhost:27017/iatraining
+### 2. Levantar MongoDB con Docker Compose
+
+```bash
+docker compose -f docker/docker-compose.yml up -d
+```
+
+Esto levanta dos servicios:
+- **MongoDB** en `localhost:27017`
+- **Mongo Express** (UI web) en `http://localhost:8081`
+
+Para detenerlos:
+```bash
+docker compose -f docker/docker-compose.yml down
 ```
 
 ### 3. Arrancar el servidor
+
 ```bash
 ./mvnw spring-boot:run
 ```
