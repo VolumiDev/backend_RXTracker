@@ -8,11 +8,11 @@ Backend de una aplicación de gestión de entrenamientos CrossFit con planificac
 
 ## ✨ ¿Qué hace?
 
-- Recibe el **JSON semanal generado por Gemini** y lo valida, transforma y persiste en MongoDB
+- Recibe el **JSON semanal generado por IA** y lo valida, transforma y persiste en MongoDB
 - Genera automáticamente **7 sesiones diarias** por cada plan cargado
 - Permite **registrar resultados reales** de cada sesión
 - Calcula **1RM automáticamente** (fórmula de Epley) y detecta **PRs**
-- Expone una **API REST** lista para ser consumida por Flutter
+- Expone una **API REST** lista para ser consumida por cualquier frontal
 
 ---
 
