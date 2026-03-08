@@ -1,6 +1,12 @@
 spring:
   application:
     name: IATrainig
+  aop:
+    auto: true
+    proxy-target-class: true
   data:
     mongodb:
-      uri: mongodb://root:password@localhost:27017/iatraining_db?authSource=admin
+      uri: "${MONGODB_URI}"
+  jackson:
+    property-naming-strategy: SNAKE_CASE
+    default-property-inclusion: non_null

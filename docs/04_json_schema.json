@@ -1,0 +1,500 @@
+{
+  "_comentario": "JSON DE REFERENCIA COMPLETO — Usar como plantilla. Todos los campos posibles están representados. Los campos marcados con _opcional pueden omitirse si no aplican.",
+  "plan_maestro": {
+    "semana": 1,
+    "mesociclo": 1,
+    "fase": "Acumulacion",
+    "objetivo_principal": "Descripcion del objetivo principal de la semana",
+    "atleta": {
+      "nombre": "Nombre del atleta",
+      "nivel": "intermedio",
+      "_nivel_valores_posibles": ["principiante", "intermedio", "avanzado", "elite"]
+    },
+    "entrenamientos": [
+
+      {
+        "_comentario": "=== DIA CON SESION COMPLETA: warmup + strength + wod_for_time + accessory + cooldown ===",
+        "dia": "Lunes",
+        "tipo_sesion": "Fuerza y WOD For Time",
+        "hora_inicio": "07:00",
+        "bloques": [
+
+          {
+            "orden": 1,
+            "block_type": "warmup",
+            "descripcion": "Texto libre describiendo el calentamiento completo.",
+            "duracion_min": 10,
+            "rpe_objetivo": 3.0,
+            "zona_fc": "Z1-Z2"
+          },
+
+          {
+            "orden": 2,
+            "block_type": "strength",
+            "ejercicios": [
+              {
+                "nombre": "Back Squat",
+                "categoria": "strength",
+                "_categoria_valores_posibles": ["strength", "olympic_lifting", "gymnastics", "metcon", "cardio", "salto_cuerda", "movilidad"],
+                "sets": 4,
+                "reps": 5,
+                "intensidad": {
+                  "tipo": "porcentaje_rm",
+                  "_tipo_valores_posibles": ["porcentaje_rm", "heavy_single", "rm_del_dia", "peso_fijo", "peso_libre", "corporal"],
+                  "porcentaje_rm_min": 75,
+                  "porcentaje_rm_max": 80,
+                  "peso_kg_referencia": null,
+                  "_opcional_peso_kg": "Rellenar si se conoce el RM actual del atleta"
+                },
+                "tempo": {
+                  "bajada": "controlada",
+                  "pausa_abajo": "1s",
+                  "subida": "explosiva"
+                },
+                "descanso_entre_series_seg": 180,
+                "notas": "Notas tecnicas o indicaciones adicionales."
+              },
+              {
+                "nombre": "Press Estricto",
+                "categoria": "strength",
+                "sets": 3,
+                "reps": 8,
+                "intensidad": {
+                  "tipo": "peso_fijo",
+                  "peso_kg": 50
+                },
+                "descanso_entre_series_seg": 120,
+                "notas": null
+              }
+            ],
+            "rpe_objetivo": 7.5,
+            "zona_fc": "recuperacion_entre_series",
+            "duracion_estimada_min": 25
+          },
+
+          {
+            "orden": 3,
+            "block_type": "strength",
+            "_comentario": "Ejemplo de heavy single / RM del dia (halterofilia)",
+            "ejercicios": [
+              {
+                "nombre": "Clean and Jerk",
+                "categoria": "olympic_lifting",
+                "sets": 1,
+                "reps": 1,
+                "intensidad": {
+                  "tipo": "rm_del_dia",
+                  "descripcion": "Buscar heavy single en 15 min. Priorizar tecnica sobre carga.",
+                  "porcentaje_rm_min": null,
+                  "porcentaje_rm_max": null
+                },
+                "descanso_entre_series_seg": null,
+                "notas": "Parar si la tecnica falla. No forzar maximo absoluto."
+              }
+            ],
+            "rpe_objetivo": 8.5,
+            "zona_fc": "picos_altos_recuperacion_completa",
+            "duracion_estimada_min": 15
+          },
+
+          {
+            "orden": 4,
+            "block_type": "wod_for_time",
+            "nombre_wod": "Fran",
+            "es_benchmark": true,
+            "tiempo_cap_min": 10,
+            "formato": {
+              "tipo": "reps_descendentes",
+              "_tipo_valores_posibles": ["reps_descendentes", "reps_ascendentes", "reps_fijas", "rondas_fijas"],
+              "series": [21, 15, 9]
+            },
+            "ejercicios": [
+              {
+                "nombre": "Thruster",
+                "categoria": "metcon",
+                "intensidad": {
+                  "tipo": "peso_fijo",
+                  "peso_kg": 43,
+                  "peso_kg_scaled": 30
+                },
+                "notas": null
+              },
+              {
+                "nombre": "Pull-ups",
+                "categoria": "gymnastics",
+                "intensidad": {
+                  "tipo": "corporal"
+                },
+                "notas": null
+              }
+            ],
+            "escalado": {
+              "rx": true,
+              "opciones_scaled": ["Ring Rows", "Jumping Pull-ups"],
+              "opciones_masters": ["Peso reducido + Pull-ups con banda"]
+            },
+            "estrategia": "Salir en sets grandes en la ronda de 21. Mantener ritmo en 15 y 9.",
+            "rpe_objetivo": 9.5,
+            "zona_fc": "Z5",
+            "duracion_estimada_min": 8
+          },
+
+          {
+            "orden": 5,
+            "block_type": "accessory",
+            "nombre": "Chapa y Pintura — Core y Cadena Posterior",
+            "formato": {
+              "tipo": "rondas",
+              "_tipo_valores_posibles": ["rondas", "tiempo_total", "superset", "circuito"],
+              "rondas": 3,
+              "descanso_entre_rondas_seg": 60
+            },
+            "ejercicios": [
+              {
+                "nombre": "Hollow Rocks",
+                "sets": 3,
+                "reps": 20,
+                "implemento": null,
+                "notas": null
+              },
+              {
+                "nombre": "Banded Hamstring Curls",
+                "sets": 3,
+                "reps_min": 12,
+                "reps_max": 15,
+                "implemento": "banda elastica",
+                "notas": null
+              },
+              {
+                "nombre": "Single Leg RDL",
+                "sets": 3,
+                "reps": 10,
+                "implemento": "KB",
+                "peso_referencia": "ligero",
+                "notas": "Por pierna. Controlar equilibrio."
+              },
+              {
+                "nombre": "Face Pulls",
+                "sets": 3,
+                "reps": 15,
+                "implemento": "goma",
+                "notas": null
+              }
+            ],
+            "rpe_objetivo": 5.5,
+            "zona_fc": "Z1-Z2"
+          },
+
+          {
+            "orden": 6,
+            "block_type": "cooldown",
+            "descripcion": "Texto libre describiendo la vuelta a la calma.",
+            "duracion_min": 8,
+            "rpe_objetivo": 2.0,
+            "zona_fc": "Z1"
+          }
+
+        ]
+      },
+
+      {
+        "_comentario": "=== DIA CON AMRAP + RECOVERY (piscina u otra modalidad) ===",
+        "dia": "Martes",
+        "tipo_sesion": "Motor y Recuperacion Activa",
+        "hora_inicio": "07:00",
+        "bloques": [
+
+          {
+            "orden": 1,
+            "block_type": "warmup",
+            "descripcion": "Remo 3 min suave + movilidad caderas.",
+            "duracion_min": 8,
+            "rpe_objetivo": 3.0,
+            "zona_fc": "Z1-Z2"
+          },
+
+          {
+            "orden": 2,
+            "block_type": "wod_amrap",
+            "nombre_wod": null,
+            "es_benchmark": false,
+            "duracion_min": 20,
+            "ejercicios": [
+              {
+                "nombre": "Remo",
+                "categoria": "cardio",
+                "distancia_m": 500,
+                "reps": null,
+                "notas": "Ritmo constante. No sprint."
+              },
+              {
+                "nombre": "Wall Balls",
+                "categoria": "metcon",
+                "reps": 20,
+                "distancia_m": null,
+                "intensidad": {
+                  "tipo": "peso_fijo",
+                  "peso_kg": 9,
+                  "peso_kg_scaled": 6
+                },
+                "notas": null
+              },
+              {
+                "nombre": "Double Unders",
+                "categoria": "salto_cuerda",
+                "reps": 40,
+                "reps_scaled": 80,
+                "notas": "Scaled: 80 Single Unders"
+              }
+            ],
+            "estrategia": "Ritmo constante durante todo el AMRAP. El objetivo es el motor aerobico.",
+            "rpe_objetivo": 7.5,
+            "zona_fc": "Z3-Z4",
+            "duracion_estimada_min": 20
+          },
+
+          {
+            "orden": 3,
+            "block_type": "recovery",
+            "modalidad": "natacion",
+            "_modalidad_valores_posibles": ["natacion", "bici", "remo_suave", "caminata", "yoga", "movilidad"],
+            "descripcion": "Nado suave. Alargar brazada y relajar piernas.",
+            "distancia_m_min": 1000,
+            "distancia_m_max": 1500,
+            "duracion_min": 30,
+            "rpe_objetivo": 3.5,
+            "zona_fc": "Z1-Z2"
+          }
+
+        ]
+      },
+
+      {
+        "_comentario": "=== DIA DE DESCANSO TOTAL ===",
+        "dia": "Miercoles",
+        "tipo_sesion": "Descanso Total",
+        "hora_inicio": null,
+        "bloques": [
+          {
+            "orden": 1,
+            "block_type": "rest",
+            "descripcion": "Reposo absoluto o movilidad suave en casa. Sin entrenamiento estructurado.",
+            "rpe_objetivo": 0,
+            "zona_fc": "reposo"
+          }
+        ]
+      },
+
+      {
+        "_comentario": "=== DIA CON EMOM + INTERVALOS ===",
+        "dia": "Jueves",
+        "tipo_sesion": "Gimnasticos y Capacidad",
+        "hora_inicio": "07:00",
+        "bloques": [
+
+          {
+            "orden": 1,
+            "block_type": "warmup",
+            "descripcion": "Activacion escapular + 3 rondas de movimientos basicos de gymnastics.",
+            "duracion_min": 10,
+            "rpe_objetivo": 3.5,
+            "zona_fc": "Z1-Z2"
+          },
+
+          {
+            "orden": 2,
+            "block_type": "wod_emom",
+            "nombre_wod": null,
+            "es_benchmark": false,
+            "duracion_total_min": 16,
+            "formato": {
+              "tipo": "emom_alternado",
+              "_tipo_valores_posibles": ["emom_simple", "emom_alternado", "emom_cada_2min"],
+              "minutos_por_bloque": 1,
+              "bloques_alternados": [
+                {
+                  "minuto": "impar",
+                  "ejercicio": "Muscle-ups",
+                  "reps": 3,
+                  "notas": "Scaled: Chest-to-bar Pull-ups x5"
+                },
+                {
+                  "minuto": "par",
+                  "ejercicio": "Handstand Push-ups",
+                  "reps": 5,
+                  "notas": "Scaled: Pike Push-ups x8"
+                }
+              ]
+            },
+            "rpe_objetivo": 7.0,
+            "zona_fc": "Z3-Z4",
+            "duracion_estimada_min": 16
+          },
+
+          {
+            "orden": 3,
+            "block_type": "wod_intervalos",
+            "nombre_wod": null,
+            "es_benchmark": false,
+            "formato": {
+              "tipo": "intervalos",
+              "rondas": 4,
+              "trabajo_min": 3,
+              "descanso_min": 1
+            },
+            "ejercicios": [
+              {
+                "nombre": "Toes to Bar",
+                "categoria": "gymnastics",
+                "reps": 15,
+                "notas": null
+              },
+              {
+                "nombre": "Box Jump Overs",
+                "categoria": "metcon",
+                "reps": 10,
+                "altura_cm": 60,
+                "notas": null
+              },
+              {
+                "nombre": "Burpees",
+                "categoria": "metcon",
+                "reps": "max_tiempo_restante",
+                "notas": "Maximo de burpees en el tiempo que quede tras completar T2B y BJO."
+              }
+            ],
+            "escalado": {
+              "rx": true,
+              "opciones_scaled": ["Hanging Knee Raises", "Step Overs"]
+            },
+            "rpe_objetivo": 8.5,
+            "zona_fc": "Z4-Z5"
+          }
+
+        ]
+      },
+
+      {
+        "_comentario": "=== DIA DE COMPETICION / OPEN ===",
+        "dia": "Viernes",
+        "tipo_sesion": "Competicion (Open)",
+        "hora_inicio": "07:00",
+        "bloques": [
+
+          {
+            "orden": 1,
+            "block_type": "warmup",
+            "descripcion": "Calentamiento especifico para el Open. Activar movimientos del WOD.",
+            "duracion_min": 20,
+            "rpe_objetivo": 4.0,
+            "zona_fc": "Z2-Z3"
+          },
+
+          {
+            "orden": 2,
+            "block_type": "wod_competicion",
+            "nombre_wod": "CrossFit Open 25.1",
+            "es_open": true,
+            "edicion_open": "2025",
+            "estado": "confirmado",
+            "_estado_valores_posibles": ["confirmado", "pendiente_anuncio", "simulacro"],
+            "descripcion_oficial": "Complete as many reps as possible in 15 minutes of: 3 pull-ups, 3 box jumps, 3 power snatches, then 6, 6, 6... adding 3 reps each round.",
+            "resultado_previo": {
+              "fecha": "2024-03-01",
+              "reps_totales": 147,
+              "tiempo_seg": null,
+              "escalado": "Rx"
+            },
+            "rpe_objetivo": 10,
+            "zona_fc": "Z5"
+          },
+
+          {
+            "orden": 3,
+            "block_type": "cooldown",
+            "descripcion": "Caminar 10 min. Estiramientos suaves. Hidratacion y nutricion post-esfuerzo.",
+            "duracion_min": 15,
+            "rpe_objetivo": 2.0,
+            "zona_fc": "Z1"
+          }
+
+        ]
+      },
+
+      {
+        "_comentario": "=== DIA DE TEAM WOD ===",
+        "dia": "Sabado",
+        "tipo_sesion": "Team WOD",
+        "hora_inicio": "10:00",
+        "bloques": [
+
+          {
+            "orden": 1,
+            "block_type": "warmup",
+            "descripcion": "Calentamiento en grupo. Dinamicas de activacion.",
+            "duracion_min": 10,
+            "rpe_objetivo": 3.5,
+            "zona_fc": "Z1-Z2"
+          },
+
+          {
+            "orden": 2,
+            "block_type": "wod_team",
+            "nombre_wod": null,
+            "formato": {
+              "tipo": "i_go_you_go",
+              "_tipo_valores_posibles": ["i_go_you_go", "sincronizado", "relevos", "libre"],
+              "num_personas": 2
+            },
+            "ejercicios": [
+              {
+                "nombre": "Calorie Row",
+                "categoria": "cardio",
+                "calorias": 20,
+                "notas": "Cada atleta rema 20 cal mientras el otro descansa."
+              },
+              {
+                "nombre": "Deadlift",
+                "categoria": "strength",
+                "reps": 10,
+                "intensidad": {
+                  "tipo": "peso_fijo",
+                  "peso_kg": 100
+                },
+                "notas": null
+              },
+              {
+                "nombre": "Bar-facing Burpees",
+                "categoria": "metcon",
+                "reps": 10,
+                "notas": null
+              }
+            ],
+            "duracion_min": 30,
+            "descripcion_adicional": "Contenido a definir en el box o usar esta estructura como base.",
+            "rpe_objetivo": 7.5,
+            "zona_fc": "Z3-Z4"
+          }
+
+        ]
+      },
+
+      {
+        "_comentario": "=== DOMINGO: DESCANSO ===",
+        "dia": "Domingo",
+        "tipo_sesion": "Descanso Total",
+        "hora_inicio": null,
+        "bloques": [
+          {
+            "orden": 1,
+            "block_type": "rest",
+            "descripcion": "Recarga completa. Reposo fisico y mental. Preparar la semana siguiente.",
+            "rpe_objetivo": 0,
+            "zona_fc": "reposo"
+          }
+        ]
+      }
+
+    ]
+  }
+}
